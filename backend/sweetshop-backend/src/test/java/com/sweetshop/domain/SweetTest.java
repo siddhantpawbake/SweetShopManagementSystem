@@ -1,7 +1,8 @@
 package com.sweetshop.domain;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class SweetTest {
 
@@ -21,26 +22,32 @@ public class SweetTest {
         assertEquals(500.0, sweet.getPrice(), 0.001);
         assertEquals(10, sweet.getQuantity());
     }
-    @Test(expected = IllegalArgumentException.class)
+@Test
 public void shouldNotAllowNegativePrice() {
-    new Sweet(
-            "2",
-            "Gulab Jamun",
-            "Indian",
-            -100.0,
-            5
-    );
+    assertThrows(IllegalArgumentException.class, () -> {
+        new Sweet(
+                "2",
+                "Gulab Jamun",
+                "Indian",
+                -100.0,
+                5
+        );
+    });
 }
-@Test(expected = IllegalArgumentException.class)
+
+@Test
 public void shouldNotAllowNegativeQuantity() {
-    new Sweet(
-            "3",
-            "Rasgulla",
-            "Indian",
-            200.0,
-            -3
-    );
+    assertThrows(IllegalArgumentException.class, () -> {
+        new Sweet(
+                "3",
+                "Rasgulla",
+                "Indian",
+                200.0,
+                -3
+        );
+    });
 }
+
 @Test
 public void shouldDecreaseQuantityWhenPurchased() {
     Sweet sweet = new Sweet(
@@ -55,7 +62,7 @@ public void shouldDecreaseQuantityWhenPurchased() {
 
     assertEquals(4, sweet.getQuantity());
 }
-@Test(expected = IllegalStateException.class)
+@Test
 public void shouldNotAllowPurchaseWhenOutOfStock() {
     Sweet sweet = new Sweet(
             "5",
@@ -65,8 +72,9 @@ public void shouldNotAllowPurchaseWhenOutOfStock() {
             0
     );
 
-    sweet.purchase();
+    assertThrows(IllegalStateException.class, sweet::purchase);
 }
+
 @Test
 public void shouldIncreaseQuantityWhenRestocked() {
     Sweet sweet = new Sweet(
@@ -81,7 +89,7 @@ public void shouldIncreaseQuantityWhenRestocked() {
 
     assertEquals(15, sweet.getQuantity());
 }
-@Test(expected = IllegalArgumentException.class)
+@Test
 public void shouldNotAllowRestockWithNonPositiveQuantity() {
     Sweet sweet = new Sweet(
             "7",
@@ -91,8 +99,9 @@ public void shouldNotAllowRestockWithNonPositiveQuantity() {
             3
     );
 
-    sweet.restock(0);
+    assertThrows(IllegalArgumentException.class, () -> sweet.restock(0));
 }
+
 
 
 }

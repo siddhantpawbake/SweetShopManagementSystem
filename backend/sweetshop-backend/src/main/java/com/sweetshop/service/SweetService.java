@@ -4,6 +4,7 @@ import com.sweetshop.domain.Sweet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SweetService {
 
@@ -14,43 +15,24 @@ public class SweetService {
     }
 
     public List<Sweet> getAllSweets() {
-        return sweets;
+        return new ArrayList<>(sweets);
     }
+
     public List<Sweet> searchByName(String name) {
-    List<Sweet> result = new ArrayList<>();
-
-    for (Sweet sweet : sweets) {
-        if (sweet.getName().toLowerCase().contains(name.toLowerCase())) {
-            result.add(sweet);
-        }
+        return sweets.stream()
+                .filter(s -> s.getName().toLowerCase().contains(name.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
-    return result;
-}
     public List<Sweet> searchByCategory(String category) {
-    List<Sweet> result = new ArrayList<>();
-
-    for (Sweet sweet : sweets) {
-        if (sweet.getCategory().toLowerCase()
-                .contains(category.toLowerCase())) {
-            result.add(sweet);
-        }
+        return sweets.stream()
+                .filter(s -> s.getCategory().equalsIgnoreCase(category))
+                .collect(Collectors.toList());
     }
 
-    return result;
-}
-    public List<Sweet> searchByPriceRange(double minPrice, double maxPrice) {
-    List<Sweet> result = new ArrayList<>();
-
-    for (Sweet sweet : sweets) {
-        if (sweet.getPrice() >= minPrice && sweet.getPrice() <= maxPrice) {
-            result.add(sweet);
-        }
+    public List<Sweet> searchByPriceRange(double min, double max) {
+        return sweets.stream()
+                .filter(s -> s.getPrice() >= min && s.getPrice() <= max)
+                .collect(Collectors.toList());
     }
-
-    return result;
 }
-
-
-}
-
