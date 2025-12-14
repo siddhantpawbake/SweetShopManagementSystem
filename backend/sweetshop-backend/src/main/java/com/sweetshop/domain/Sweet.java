@@ -9,12 +9,21 @@ public class Sweet {
     private int quantity;
 
     public Sweet(String id, String name, String category, double price, int quantity) {
-        this.id = id;
-        this.name = name;
-        this.category = category;
-        this.price = price;
-        this.quantity = quantity;
+
+    if (price < 0) {
+        throw new IllegalArgumentException("Price cannot be negative");
     }
+
+    if (quantity < 0) {
+        throw new IllegalArgumentException("Quantity cannot be negative");
+    }
+
+    this.id = id;
+    this.name = name;
+    this.category = category;
+    this.price = price;
+    this.quantity = quantity;
+}
 
     public String getId() {
         return id;
