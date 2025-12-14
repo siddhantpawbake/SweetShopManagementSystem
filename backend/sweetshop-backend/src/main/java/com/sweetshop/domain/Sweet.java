@@ -1,13 +1,20 @@
 package com.sweetshop.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "sweets")
 public class Sweet {
 
+    @Id
     private String id;
+
     private String name;
     private String category;
     private double price;
     private int quantity;
 
+    public Sweet() {}
     public Sweet(String id, String name, String category, double price, int quantity) {
 
     if (price < 0) {

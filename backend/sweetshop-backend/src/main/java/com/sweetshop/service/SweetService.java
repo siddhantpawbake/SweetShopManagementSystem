@@ -1,38 +1,37 @@
 package com.sweetshop.service;
 
 import com.sweetshop.domain.Sweet;
+import com.sweetshop.repository.SweetRepository;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+@Service
 public class SweetService {
 
-    private final List<Sweet> sweets = new ArrayList<>();
+    private final SweetRepository sweetRepository;
 
-    public void addSweet(Sweet sweet) {
-        sweets.add(sweet);
+    public SweetService(SweetRepository sweetRepository) {
+        this.sweetRepository = sweetRepository;
+    }
+
+    public Sweet addSweet(Sweet sweet) {
+        return sweetRepository.save(sweet);
     }
 
     public List<Sweet> getAllSweets() {
-        return new ArrayList<>(sweets);
+        return sweetRepository.findAll();
     }
 
     public List<Sweet> searchByName(String name) {
-        return sweets.stream()
-                .filter(s -> s.getName().toLowerCase().contains(name.toLowerCase()))
-                .collect(Collectors.toList());
+        return sweetRepository.findByNameContainingIgnoreCase(name);
     }
 
     public List<Sweet> searchByCategory(String category) {
-        return sweets.stream()
-                .filter(s -> s.getCategory().equalsIgnoreCase(category))
-                .collect(Collectors.toList());
+        return sweetRepository.findByCategoryIgnoreCase(category);
     }
 
     public List<Sweet> searchByPriceRange(double min, double max) {
-        return sweets.stream()
-                .filter(s -> s.getPrice() >= min && s.getPrice() <= max)
-                .collect(Collectors.toList());
+        return sweetRepository.findByPriceBetween(min, max);
     }
 }
