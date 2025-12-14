@@ -41,5 +41,31 @@ public void shouldNotAllowNegativeQuantity() {
             -3
     );
 }
+@Test
+public void shouldDecreaseQuantityWhenPurchased() {
+    Sweet sweet = new Sweet(
+            "4",
+            "Barfi",
+            "Indian",
+            300.0,
+            5
+    );
+
+    sweet.purchase();
+
+    assertEquals(4, sweet.getQuantity());
+}
+@Test(expected = IllegalStateException.class)
+public void shouldNotAllowPurchaseWhenOutOfStock() {
+    Sweet sweet = new Sweet(
+            "5",
+            "Peda",
+            "Indian",
+            150.0,
+            0
+    );
+
+    sweet.purchase();
+}
 
 }
