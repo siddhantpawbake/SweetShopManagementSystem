@@ -16,5 +16,17 @@ public class SweetService {
     public List<Sweet> getAllSweets() {
         return sweets;
     }
+    public List<Sweet> searchByName(String name) {
+    List<Sweet> result = new ArrayList<>();
+
+    for (Sweet sweet : sweets) {
+        if (sweet.getName().toLowerCase().contains(name.toLowerCase())) {
+            result.add(sweet);
+        }
+    }
+
+    return result;
+}
+
 }
 
