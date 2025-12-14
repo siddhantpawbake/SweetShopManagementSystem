@@ -24,7 +24,12 @@ public class Sweet {
     this.price = price;
     this.quantity = quantity;
 }
-
+    public void purchase() {
+    if (quantity <= 0) {
+        throw new IllegalStateException("Sweet is out of stock");
+    }
+    quantity--;
+}
     public String getId() {
         return id;
     }
