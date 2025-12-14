@@ -27,6 +27,30 @@ public class SweetService {
 
     return result;
 }
+    public List<Sweet> searchByCategory(String category) {
+    List<Sweet> result = new ArrayList<>();
+
+    for (Sweet sweet : sweets) {
+        if (sweet.getCategory().toLowerCase()
+                .contains(category.toLowerCase())) {
+            result.add(sweet);
+        }
+    }
+
+    return result;
+}
+    public List<Sweet> searchByPriceRange(double minPrice, double maxPrice) {
+    List<Sweet> result = new ArrayList<>();
+
+    for (Sweet sweet : sweets) {
+        if (sweet.getPrice() >= minPrice && sweet.getPrice() <= maxPrice) {
+            result.add(sweet);
+        }
+    }
+
+    return result;
+}
+
 
 }
 
