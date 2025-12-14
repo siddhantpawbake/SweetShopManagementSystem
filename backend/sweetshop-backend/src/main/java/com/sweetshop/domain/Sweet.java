@@ -30,6 +30,13 @@ public class Sweet {
     }
     quantity--;
 }
+    public void restock(int amount) {
+    if (amount <= 0) {
+        throw new IllegalArgumentException("Restock amount must be positive");
+    }
+    quantity += amount;
+}
+
     public String getId() {
         return id;
     }

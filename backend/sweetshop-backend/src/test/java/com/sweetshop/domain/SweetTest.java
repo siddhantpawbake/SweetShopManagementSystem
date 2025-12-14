@@ -67,5 +67,32 @@ public void shouldNotAllowPurchaseWhenOutOfStock() {
 
     sweet.purchase();
 }
+@Test
+public void shouldIncreaseQuantityWhenRestocked() {
+    Sweet sweet = new Sweet(
+            "6",
+            "Ladoo",
+            "Indian",
+            100.0,
+            5
+    );
+
+    sweet.restock(10);
+
+    assertEquals(15, sweet.getQuantity());
+}
+@Test(expected = IllegalArgumentException.class)
+public void shouldNotAllowRestockWithNonPositiveQuantity() {
+    Sweet sweet = new Sweet(
+            "7",
+            "Halwa",
+            "Indian",
+            120.0,
+            3
+    );
+
+    sweet.restock(0);
+}
+
 
 }
