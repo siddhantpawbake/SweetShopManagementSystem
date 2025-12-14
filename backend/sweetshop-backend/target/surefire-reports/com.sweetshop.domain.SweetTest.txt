@@ -1,4 +1,10 @@
 -------------------------------------------------------------------------------
 Test set: com.sweetshop.domain.SweetTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in com.sweetshop.domain.SweetTest
+Tests run: 3, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0 s <<< FAILURE! - in com.sweetshop.domain.SweetTest
+shouldNotAllowNegativeQuantity(com.sweetshop.domain.SweetTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: Expected exception: java.lang.IllegalArgumentException
+
+shouldNotAllowNegativePrice(com.sweetshop.domain.SweetTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: Expected exception: java.lang.IllegalArgumentException
+
